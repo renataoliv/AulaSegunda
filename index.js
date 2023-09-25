@@ -27,7 +27,10 @@ app.listen(8080, ()=>{
 });
 
 app.get("/", (req, res)=>{
-    res.render("index");
+        Produto.findAll({ raw : Produto }).then(produtos => {
+            res.render("produtoList");
+    }); 
+ 
 });
 
 app.get("/produto", (req, res)=>{
@@ -38,6 +41,13 @@ app.post("/salvarProduto", (req, res)=>{
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
     
-    
+    Produto.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(()=>{
+            res.redirect("/")
+        });
+   
+     
 });
 
