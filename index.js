@@ -28,7 +28,9 @@ app.listen(8080, ()=>{
 
 app.get("/", (req, res)=>{
         Produto.findAll({ raw : Produto }).then(produtos => {
-            res.render("produtoList");
+            res.render("produtoList",{
+                produtos: produtos
+            });
     }); 
  
 });
@@ -36,6 +38,7 @@ app.get("/", (req, res)=>{
 app.get("/produto", (req, res)=>{
     res.render("produto");
 });
+
 
 app.post("/salvarProduto", (req, res)=>{
     var titulo = req.body.titulo;
